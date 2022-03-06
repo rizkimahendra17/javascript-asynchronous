@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Wait</title>
+</head>
+<body>
+    
+<script>
+
+    //promise <JSON Product>
+        function getProduct(){
+            const request = new Request("api/produk.json", {
+                method: "GET"
+            });
+
+            const response = fetch(request);
+
+            return response.then((response) => response.json());
+        }
+        //kalau membuat kondisi error
+
+        async function getProductNameAsync(){
+            
+           try {
+            const Product = await getProduct();
+            return Product.name;
+           } catch (error) {
+               return "Product Not Found";
+           }
+        }
+
+        getProductNameAsync()
+            .then((productName) => console.info(productName));
+
+</script>
+
+</body>
+</html>
